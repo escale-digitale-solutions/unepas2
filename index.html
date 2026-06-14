@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Le Comptoir — Restaurant & Café</title>
+<meta name="description" content="Le Comptoir — cuisine de saison, faite maison. Menu, horaires, réservation et avis." />
+<meta name="theme-color" content="#1a1410" />
+
+<!-- ============================================================= -->
+<!--  TEMPLATE ONE-PAGE COMMERCE  —  v1                              -->
+<!--  POUR CLONER UN CLIENT :                                        -->
+<!--  1. Copie ce fichier dans un nouveau repo GitHub.               -->
+<!--  2. Modifie UNIQUEMENT l'objet COMMERCE ci-dessous (script).    -->
+<!--  3. Active GitHub Pages → tu as l'URL → génère le QR.           -->
+<!--  Aucune autre partie du fichier n'a besoin d'être touchée.      -->
+<!-- ============================================================= -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg: #1a1410;
+    --bg-soft: #221a14;
+    --card: #2a201a;
+    --line: #3a2e24;
+    --ink: #f4ece3;
+    --muted: #b6a692;
+    --gold: #c9a24b;
+    --gold-soft: #e3c987;
+    --green: #2e9e6b;
+    --radius: 16px;
+    --maxw: 680px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: radial-gradient(120% 80% at 50% -10%, #2a201a 0%, var(--bg) 55%) fixed;
+    color: var(--ink);
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+
+  h1, h2, h3, .display { font-family: "Cormorant Garamond", Georgia, serif; }
+
+  /* ---------- HERO ---------- */
+  header.hero {
+    min-height: 78vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 48px 20px 40px;
+    position: relative;
+  }
+  .kicker {
+    text-transform: uppercase;
+    letter-spacing: .28em;
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: clamp(44px, 12vw, 84px);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -.5px;
+  }
+  .hero .tagline {
+    margin-top: 14px;
+    font-size: clamp(17px, 4.5vw, 21px);
+    color: var(--muted);
+    min-height: 1.6em;
+    font-weight: 400;
+  }
+  .caret { display:inline-block; width:2px; height:1em; background:var(--gold);
+    margin-left:2px; vertical-align:-2px; animation:blink 1s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .hero-actions { margin-top: 34px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 22px; border-radius: 999px;
+    font-weight: 600; font-size: 15px; text-decoration: none;
+    border: 1px solid transparent; cursor: pointer; transition: transform .15s ease, opacity .15s ease;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn-primary { background: linear-gradient(180deg, var(--gold-soft), var(--gold)); color: #221a10; }
+  .btn-ghost { background: transparent; border-color: var(--line); color: var(--ink); }
+  .btn-green { background: var(--green); color: #fff; }
+  .btn-block { width: 100%; justify-content: center; }
+
+  .scroll-hint { margin-top: 30px; color: var(--muted); font-size: 12px; letter-spacing:.15em; text-transform: uppercase; opacity:.7; }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 44px 0; }
+  .section-title { text-align: center; margin-bottom: 28px; }
+  .section-title .kicker { margin-bottom: 8px; }
+  .section-title h2 { font-size: clamp(30px, 8vw, 42px); font-weight: 600; }
+
+  /* ---------- MENU ---------- */
+  .menu-group { margin-bottom: 26px; }
+  .menu-group h3 {
+    font-size: 26px; color: var(--gold-soft); font-weight: 600;
+    border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 14px;
+    display:flex; align-items:baseline; justify-content:space-between;
+  }
+  .menu-group h3 small { font-family: "Inter"; font-size: 11px; letter-spacing:.15em; text-transform:uppercase; color: var(--muted); }
+  .dish { display: flex; justify-content: space-between; gap: 14px; padding: 9px 0; }
+  .dish .d-name { font-weight: 600; font-size: 16px; }
+  .dish .d-desc { color: var(--muted); font-size: 14px; margin-top: 2px; }
+  .dish .d-price { color: var(--gold-soft); font-weight: 600; white-space: nowrap; font-size: 16px; }
+
+  /* ---------- INFO CARDS ---------- */
+  .cards { display: grid; gap: 14px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 20px;
+  }
+  .card h3 { font-family:"Inter"; font-size: 13px; text-transform: uppercase; letter-spacing: .12em; color: var(--gold); margin-bottom: 12px; font-weight: 600; }
+  .hours-row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 15px; border-bottom: 1px dashed var(--line); }
+  .hours-row:last-child { border-bottom: 0; }
+  .hours-row .day { color: var(--muted); }
+  .hours-row.closed .time { color: #c97b6b; }
+  .contact-line { display: flex; align-items: center; gap: 10px; padding: 7px 0; font-size: 15px; }
+  .contact-line a { color: var(--ink); text-decoration: none; }
+  .contact-line .ic { width: 20px; text-align: center; opacity: .9; }
+
+  /* ---------- REVIEW BANNER ---------- */
+  .review {
+    background: linear-gradient(160deg, #2f2519, #241c14);
+    border: 1px solid var(--gold); border-radius: var(--radius);
+    padding: 26px 22px; text-align: center;
+  }
+  .review .stars { color: var(--gold-soft); font-size: 26px; letter-spacing: 4px; }
+  .review h3 { font-size: 28px; font-weight: 600; margin: 8px 0 6px; }
+  .review p { color: var(--muted); font-size: 15px; margin-bottom: 18px; }
+
+  /* ---------- STICKY BAR ---------- */
+  .sticky-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    background: rgba(26,20,16,.92); backdrop-filter: blur(10px);
+    border-top: 1px solid var(--line);
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    display: flex; gap: 10px;
+  }
+  .sticky-bar .btn { flex: 1; padding: 13px; font-size: 14px; }
+
+  /* ---------- FOOTER ---------- */
+  footer { text-align: center; padding: 36px 20px 120px; color: var(--muted); font-size: 13px; }
+  footer .name { font-family:"Cormorant Garamond"; font-size: 22px; color: var(--ink); }
+  footer a { color: var(--gold); text-decoration: none; }
+
+  .fade { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
+  .fade.in { opacity: 1; transform: none; }
+
+  @media (min-width: 560px) { .cards { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="kicker" id="hero-kicker"></div>
+    <h1 id="hero-name"></h1>
+    <div class="tagline"><span id="typed"></span><span class="caret"></span></div>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#menu">Voir le menu</a>
+      <a class="btn btn-ghost" id="cta-reserve" href="#">Réserver</a>
+    </div>
+    <div class="scroll-hint">↓ Faites défiler</div>
+  </header>
+
+  <main>
+    <section id="menu" class="wrap fade">
+      <div class="section-title">
+        <div class="kicker">La carte</div>
+        <h2>Notre menu</h2>
+      </div>
+      <div id="menu-root"></div>
+    </section>
+
+    <section class="wrap fade">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <h3 id="review-title"></h3>
+        <p id="review-sub"></p>
+        <a class="btn btn-primary btn-block" id="cta-review" href="#" target="_blank" rel="noopener">
+          ⭐ Laisser un avis Google
+        </a>
+      </div>
+    </section>
+
+    <section class="wrap fade">
+      <div class="section-title">
+        <div class="kicker">Infos pratiques</div>
+        <h2>Nous trouver</h2>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <h3>Horaires</h3>
+          <div id="hours-root"></div>
+        </div>
+        <div class="card">
+          <h3>Contact &amp; adresse</h3>
+          <div id="contact-root"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="fade">
+    <div class="name" id="foot-name"></div>
+    <p id="foot-addr"></p>
+    <p style="margin-top:14px; opacity:.6;">Page réalisée &amp; gérée par <a href="#">votre prestataire</a></p>
+  </footer>
+
+  <nav class="sticky-bar">
+    <a class="btn btn-green" id="bar-call" href="#">📞 Appeler</a>
+    <a class="btn btn-primary" id="bar-wa" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+    <a class="btn btn-ghost" id="bar-map" href="#" target="_blank" rel="noopener">📍 Itinéraire</a>
+  </nav>
+
+<script>
+/* =================================================================
+   ⬇️  LA SEULE PARTIE À MODIFIER POUR CHAQUE CLIENT  ⬇️
+   ================================================================= */
+const COMMERCE = {
+  kicker:    "Restaurant · Café · Bistrot",
+  nom:       "Le Comptoir",
+  // Phrases qui défilent en effet machine à écrire (hero) :
+  taglines:  [
+    "Cuisine de saison, faite maison.",
+    "Le midi : formule à 16 €.",
+    "Terrasse ensoleillée, ambiance cosy.",
+    "Bienvenue chez nous."
+  ],
+
+  telephone:   "+33102030405",        // format international pour appel/WhatsApp
+  whatsappMsg: "Bonjour Le Comptoir, je souhaite réserver une table.",
+
+  // Liens (à remplacer par les vrais) :
+  lienAvisGoogle:  "https://search.google.com/local/writereview?placeid=VOTRE_PLACE_ID",
+  lienItineraire:  "https://maps.google.com/?q=Le+Comptoir+Ma+Ville",
+  lienReservation: "https://wa.me/33102030405", // ou un lien TheFork / formulaire
+
+  adresse: "12 rue de la Paix, 00000 Ma Ville",
+
+  horaires: [
+    { jour: "Lundi",    h: "Fermé",            closed: true },
+    { jour: "Mar – Ven", h: "12h–14h · 19h–22h" },
+    { jour: "Samedi",   h: "12h–15h · 19h–23h" },
+    { jour: "Dimanche", h: "12h–15h" }
+  ],
+
+  review: {
+    titre: "Vous avez aimé ?",
+    sousTitre: "Un avis Google, c'est 30 secondes — et ça nous aide énormément. Merci 🙏"
+  },
+
+  menu: [
+    {
+      categorie: "Entrées", note: "",
+      plats: [
+        { nom: "Velouté de saison",      desc: "Légumes frais du marché, crème légère", prix: "7 €" },
+        { nom: "Œuf parfait",            desc: "Champignons, parmesan, herbes",          prix: "9 €" },
+        { nom: "Burrata",                desc: "Tomates anciennes, basilic, huile d'olive", prix: "11 €" }
+      ]
+    },
+    {
+      categorie: "Plats", note: "Faits maison",
+      plats: [
+        { nom: "Entrecôte grillée",      desc: "Frites maison, beurre maître d'hôtel", prix: "22 €" },
+        { nom: "Risotto aux cèpes",      desc: "Parmesan, huile de truffe",            prix: "18 €" },
+        { nom: "Burger du Comptoir",     desc: "Bœuf charolais, cheddar affiné, frites", prix: "16 €" },
+        { nom: "Poisson du jour",        desc: "Selon arrivage, légumes de saison",    prix: "20 €" }
+      ]
+    },
+    {
+      categorie: "Desserts", note: "",
+      plats: [
+        { nom: "Fondant au chocolat",    desc: "Cœur coulant, glace vanille", prix: "8 €" },
+        { nom: "Tarte du moment",        desc: "Préparée chaque matin",       prix: "7 €" }
+      ]
+    }
+  ]
+};
+/* =================================================================
+   ⬆️  FIN DE LA ZONE À MODIFIER. Ne touche rien en dessous.  ⬆️
+   ================================================================= */
+
+(function render() {
+  const $ = (s) => document.querySelector(s);
+  const tel = COMMERCE.telephone.replace(/[^+\d]/g, "");
+  const waNumber = tel.replace(/\D/g, "");
+
+  // Texte & titres
+  document.title = COMMERCE.nom + " — " + COMMERCE.kicker;
+  $("#hero-kicker").textContent = COMMERCE.kicker;
+  $("#hero-name").textContent = COMMERCE.nom;
+  $("#review-title").textContent = COMMERCE.review.titre;
+  $("#review-sub").textContent = COMMERCE.review.sousTitre;
+  $("#foot-name").textContent = COMMERCE.nom;
+  $("#foot-addr").textContent = COMMERCE.adresse;
+
+  // Liens d'action
+  $("#cta-review").href = COMMERCE.lienAvisGoogle;
+  $("#cta-reserve").href = COMMERCE.lienReservation;
+  $("#bar-call").href = "tel:" + tel;
+  $("#bar-map").href = COMMERCE.lienItineraire;
+  const waHref = "https://wa.me/" + waNumber + "?text=" + encodeURIComponent(COMMERCE.whatsappMsg);
+  $("#bar-wa").href = waHref;
+
+  // Menu
+  $("#menu-root").innerHTML = COMMERCE.menu.map(g => `
+    <div class="menu-group">
+      <h3>${g.categorie}${g.note ? `<small>${g.note}</small>` : ""}</h3>
+      ${g.plats.map(p => `
+        <div class="dish">
+          <div>
+            <div class="d-name">${p.nom}</div>
+            ${p.desc ? `<div class="d-desc">${p.desc}</div>` : ""}
+          </div>
+          <div class="d-price">${p.prix}</div>
+        </div>`).join("")}
+    </div>`).join("");
+
+  // Horaires
+  $("#hours-root").innerHTML = COMMERCE.horaires.map(h => `
+    <div class="hours-row ${h.closed ? "closed" : ""}">
+      <span class="day">${h.jour}</span><span class="time">${h.h}</span>
+    </div>`).join("");
+
+  // Contact
+  $("#contact-root").innerHTML = `
+    <div class="contact-line"><span class="ic">📞</span><a href="tel:${tel}">${COMMERCE.telephone}</a></div>
+    <div class="contact-line"><span class="ic">💬</span><a href="${waHref}" target="_blank" rel="noopener">WhatsApp</a></div>
+    <div class="contact-line"><span class="ic">📍</span><a href="${COMMERCE.lienItineraire}" target="_blank" rel="noopener">${COMMERCE.adresse}</a></div>`;
+
+  // Effet machine à écrire
+  const typedEl = $("#typed");
+  const phrases = COMMERCE.taglines;
+  let pi = 0, ci = 0, deleting = false;
+  function tick() {
+    const full = phrases[pi];
+    ci += deleting ? -1 : 1;
+    typedEl.textContent = full.slice(0, ci);
+    let delay = deleting ? 35 : 65;
+    if (!deleting && ci === full.length) { delay = 1900; deleting = true; }
+    else if (deleting && ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; delay = 350; }
+    setTimeout(tick, delay);
+  }
+  tick();
+
+  // Apparition au scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("in"); });
+  }, { threshold: .12 });
+  document.querySelectorAll(".fade").forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>
